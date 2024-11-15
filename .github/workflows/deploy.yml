@@ -22,3 +22,8 @@ jobs:
           git add -A .
           git commit -m "generated"
           git push
+      # Updating deprecated actions/upload-artifact to v3
+      - uses: actions/upload-artifact@v3
+        with:
+          name: github-profile-3d-contrib
+          path: ./path-to-artifacts
