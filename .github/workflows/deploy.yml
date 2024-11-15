@@ -1,32 +1,49 @@
-name: GitHub-Profile-3D-Contrib
+name: Deploy
 
 on:
   push:
     branches:
       - main
 
-
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
-    name: generate-github-profile-3d-contrib
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Generate 3D GitHub Profile Contribution
-        uses: yoshi389111/github-profile-3d-contrib@0.7.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ github.repository_owner }}
-      - name: Commit & Push
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add -A .
-          git commit -m "generated"
-          git push
-      # Updated to use actions/upload-artifact@v3
-      - uses: actions/upload-artifact@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v3
         with:
-          name: github-profile-3d-contrib
-          path: ./path-to-artifacts # Update with actual artifact path
+          name: production-files
+          path: ./dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: production-files
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
