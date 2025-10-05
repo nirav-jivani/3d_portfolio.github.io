@@ -118,6 +118,17 @@ import {
   ];
   
   const experiences = [
+      {
+      title: "Software Engineer",
+      company_name: "Intuit Inc. (Persistent Systems)",
+      icon: Intuit,
+      iconBg: "#383E56",
+      date: "August 2025 - Present",
+      points: [
+         "Contributed to Profile Tax team, developing and refactoring 50+ compliance forms and logic for a desktop application serving 20K+ Canadian tax professionals, ensuring 100% CRA alignment.",
+         "Collaborated with CRA employees and internal tax analysts to translate legislative tax updates into functional requirements, achieving 98% compliance accuracy across all Canadian provinces." 
+      ],
+    },
     {
       title: "Software Engineer",
       company_name: "Neopric Inc.",
