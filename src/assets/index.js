@@ -41,6 +41,7 @@ import limitless  from "./company/limitless_health.png";
  import DDU from "../assets/DDU.png";
  import ISRO from "../assets/ISRO.jpg";
  import neoapps from "../assets/neoapps.jpeg";
+ import Intuit from "../assets/Intuit.avif";
  import vision from "../assets/vision.jpeg";
  import netflix from "../assets/netflix.png";
  import ovs from "../assets/ovs.png";
@@ -86,4 +87,5 @@ export {
   jobit,
   tripguide,
   nlp_video,
+  Intuit,
 };
